@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if registros %}
+        {% for registro in registros %}
+            <div class="card">
+                <h5 class="card-header"> Data: {{registro.data}}</h5>
+                <h5 class="card-header"> Pergunta: {{registro.pergunta}}</h5>
+                {% if registro.comportamento == "" %}
+                <h5 class="card-header"> Comportamento da I.A.: Padrão</h5>
+                {% else %}
+                <h5 class="card-header"> Comportamento da I.A.: {{registro.comportamento}}</h5>
+                {% endif %}
+            <div class="card-body">
+                    
+<pre>
+    {{registro.resposta}}
+</pre>
+
+                    <div class="text-end">
+                        <a href="{% url 'deletar_registro' registro.id %}" class="btn btn-danger btn-sm">Deletar</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+    {% else %}
+    <p class="text-center">Histórico vazio</p>
+    {% endif %}
+{% endblock content %}
